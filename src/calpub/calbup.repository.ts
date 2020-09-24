@@ -26,4 +26,15 @@ export class CalbupRepository extends Repository<Calbup> {
         return calbup
 
     }
+
+    async getCalbup(): Promise<Calbup[]> {
+        const query = this.createQueryBuilder('calbup')
+        try {
+            const calbup = await query.getMany();
+            return calbup;
+        } catch (error) {
+            throw new InternalServerErrorException();
+        }
+    }
+    
 }

@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Query, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Query, UsePipes, ValidationPipe } from '@nestjs/common';
 import { CreateCabupDto } from './dto/create-cabup.dto';
 import { CalpubService } from './calpub.service';
 import { Calbup } from './calbup.entity';
@@ -8,6 +8,7 @@ export class CalpubController {
     constructor(private calbupService: CalpubService) {}
 
     @Post('/create')
+    @UsePipes(ValidationPipe)
     createCabup(
         @Body() createCapubDto: CreateCabupDto,
     ): Promise<Calbup> {
@@ -27,6 +28,7 @@ export class CalpubController {
     }
 
     @Patch('/:id')
+    @UsePipes(ValidationPipe)
     updateCalbup(
         @Param('id', ParseIntPipe) id: number,
         @Body() createCabupDto: CreateCabupDto

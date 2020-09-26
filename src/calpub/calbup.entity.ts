@@ -1,4 +1,5 @@
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Voter } from "src/voter/voter.entity";
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 
 @Entity()
 export class Calbup extends BaseEntity {
@@ -16,4 +17,7 @@ export class Calbup extends BaseEntity {
 
     @Column()
     misi: string;
+
+    @OneToMany(type => Voter, voter => voter.calbup, { eager: true})
+    voter: Voter[]
 }

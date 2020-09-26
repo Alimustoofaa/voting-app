@@ -7,12 +7,15 @@ import { AuthService } from './auth.service';
 import { JwtSrategy } from './jwt.strategy';
 import { RolesGuard } from './user.guard';
 import { UserRepository } from './user.repository';
+import * as config from 'config';
+
+const jwtConfig = config.get('jwt');
 
 @Module({
   imports: [
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
-      secret: 'OkeBos2020',
+      secret: process.env.JWT_SECRET || jwtConfig.secret,
       // signOptions: {
       //   expiresIn: 3600
       // }

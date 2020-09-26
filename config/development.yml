@@ -1,7 +1,7 @@
 db:
-    host        : 'localhost'
-    username    : 'postgres'
-    password    : 'root'
+    host        : 'ec2-54-175-77-250.compute-1.amazonaws.com'
+    username    : 'cvpjhzjewxalmc'
+    password    : '660f89d95c44d3cf3615ec1e8ffa3f26c7998b5424803d06ea1a208a2f15e29b'
     synchronize : true
 
 jwt:

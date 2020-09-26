@@ -5,7 +5,6 @@ import { CreateCabupDto } from "./dto/create-cabup.dto";
 
 @EntityRepository(Calbup)
 export class CalbupRepository extends Repository<Calbup> {
-    logger: any;
     async createCabup(
         createCabupDto: CreateCabupDto
     ): Promise<Calbup> {
@@ -20,7 +19,6 @@ export class CalbupRepository extends Repository<Calbup> {
         try {
             await calbup.save();
         } catch (error) {
-            // this.logger.error(`Failed to create task for user "${user.username}". DATA: ${JSON.stringify(createTaskDto)}. `, error.stack)
             throw new InternalServerErrorException();
         }
         return calbup

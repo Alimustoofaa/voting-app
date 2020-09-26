@@ -3,13 +3,16 @@ import { CreateCabupDto } from './dto/create-cabup.dto';
 import { CalpubService } from './calpub.service';
 import { Calbup } from './calbup.entity';
 import { AuthGuard } from '@nestjs/passport';
+import { RolesGuard } from 'src/auth/user.guard';
+import { Roles } from 'src/auth/user-role.decoration';
 
 @Controller('calpub')
-@UseGuards(AuthGuard())
+@UseGuards(AuthGuard(), RolesGuard)
 export class CalpubController {
     constructor(private calbupService: CalpubService) {}
 
     @Post('/create')
+    // @Roles('admin')
     @UsePipes(ValidationPipe)
     createCabup(
         @Body() createCapubDto: CreateCabupDto,
@@ -18,6 +21,7 @@ export class CalpubController {
     }
 
     @Delete('/:id')
+    @Roles('admin')
     deleteCalbup(
         @Param('id', ParseIntPipe) id: number
     ): Promise<void> {
@@ -25,11 +29,13 @@ export class CalpubController {
     }
 
     @Get()
+    @Roles('admin', 'voter')
     getCalbup(): Promise<Calbup[]> {
         return this.calbupService.getCalbup();
     }
 
     @Patch('/:id')
+    @Roles('admin')
     @UsePipes(ValidationPipe)
     updateCalbup(
         @Param('id', ParseIntPipe) id: number,

@@ -1,9 +1,11 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Query, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Query, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { CreateCabupDto } from './dto/create-cabup.dto';
 import { CalpubService } from './calpub.service';
 import { Calbup } from './calbup.entity';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('calpub')
+@UseGuards(AuthGuard())
 export class CalpubController {
     constructor(private calbupService: CalpubService) {}
 
